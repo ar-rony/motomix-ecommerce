@@ -31,7 +31,6 @@ export default function Navbar() {
     { name: 'HOME', href: '/' },
     { name: 'SHOP', href: '/product' },
     { name: 'BLOG', href: '/blog' },
-    { name: 'Categories', href: '/category' },
   ];
 
   return (

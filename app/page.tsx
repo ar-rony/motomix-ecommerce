@@ -1,65 +1,164 @@
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { products } from '@/data/products';
+import { blogPosts } from '@/data/posts';
+import ProductCard from '@/components/ProductCard';
+import { StarIcon, TruckIcon, ShieldCheckIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<'new' | 'bestsellers' | 'mostviewed'>('new');
+
+  // Filter products by tab
+  const getTabProducts = () => {
+    if (activeTab === 'new') return products.filter(p => p.is_new).slice(0, 10);
+    if (activeTab === 'bestsellers') return products.filter(p => p.is_bestseller).slice(0, 10);
+    return products.sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 10);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* HERO SECTION - with motorcycle image and text for oils/tyres */}
+      <section className="relative bg-black text-white h-70vh">
+        <div className="absolute inset-0 z-0">
+          <Image src="/bike.jpg" alt="Motorcycle" fill className="object-cover opacity-40" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="relative z-10 container items-center justify-center mx-auto px-4 py-24 md:py-32">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-6xl font-bold">The Three Traction Level Control System.</h1>
+            <p className="text-lg mt-4 text-gray-200">The price you pay on engine oil or tyres is the money you get back on performance. Just a little more incentive to get you certain the claims of covering long distances.</p>
+            <div className="mt-8 flex gap-4">
+              <Link href="/product/category/engine-oil" className="bg-amber-600 hover:bg-amber-700 px-6 py-3 rounded-md font-semibold">Shop Oils</Link>
+              <Link href="/product/category/tyres" className="border border-white hover:bg-white hover:text-black px-6 py-3 rounded-md font-semibold transition">Shop Tyres</Link>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+
+
+      {/* Featured Products with Tabs */}
+      <section className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-2">Featured Products</h2>
+        <p className="text-center text-gray-500 mb-6">A laoreet ad litora consequat a luctus a suspendisse</p>
+        
+        <div className="flex justify-center gap-8 border-b pb-2 mb-8">
+          <button onClick={() => setActiveTab('new')} className={`pb-2 text-lg font-semibold ${activeTab === 'new' ? 'border-b-2 border-amber-600 text-amber-600' : 'text-gray-500'}`}>NEW ARRIVALS</button>
+          <button onClick={() => setActiveTab('bestsellers')} className={`pb-2 text-lg font-semibold ${activeTab === 'bestsellers' ? 'border-b-2 border-amber-600 text-amber-600' : 'text-gray-500'}`}>BESTSELLERS</button>
+          <button onClick={() => setActiveTab('mostviewed')} className={`pb-2 text-lg font-semibold ${activeTab === 'mostviewed' ? 'border-b-2 border-amber-600 text-amber-600' : 'text-gray-500'}`}>MOST VIEWED</button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {getTabProducts().map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
+      {/* Text block: "Together This Affords a Sporty Position" */}
+      <section className="bg-gray-100 py-12 mt-8">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-center">
+          <div className="md:w-1/2">
+            <h3 className="text-3xl font-bold">Together This Affords a Sporty Position.</h3>
+            <p className="mt-4 text-gray-600">Is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances toil.</p>
+            <button className="mt-6 bg-amber-600 text-white px-6 py-2 rounded">SHOP NOW</button>
+          </div>
+          <div className="md:w-1/2 relative h-64">
+            <Image src="/images/sporty-position.jpg" alt="Sporty riding" fill className="object-cover rounded-lg" />
+          </div>
+        </div>
+      </section>
+
+      {/* Rent Motorcycle section – adapted to "Find Your Perfect Oil & Tyre" */}
+      <section className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center mb-2">Find Your Perfect Oil & Tyre</h2>
+        <p className="text-center text-gray-500 mb-8">A laoreet ad litora consequat a luctus a suspendisse rutrum.</p>
+        <div className="flex flex-col md:flex-row gap-8">
+          {[
+            { name: "Castrol Power1 20W-50", power: "High Performance", topSpeed: "Excellent wear protection", groundClearance: "API SN / JASO MA2", image: "/images/oil2.jpg", price: "$24" },
+            { name: "Pirelli Diablo Rosso II", power: "Sport Grip", topSpeed: "Superb cornering stability", groundClearance: "ZR rated", image: "/images/tyre4.jpg", price: "$89" },
+          ].map((item, idx) => (
+            <div key={idx} className="flex-1 border rounded-lg overflow-hidden shadow-md">
+              <div className="relative h-64 w-full bg-gray-200">
+                <Image src={item.image} alt={item.name} fill className="object-cover" />
+              </div>
+              <div className="p-4">
+                <h3 className="text-xl font-bold">{item.name}</h3>
+                <div className="mt-2 space-y-1 text-sm">
+                  <p><strong>Spec:</strong> {item.power}</p>
+                  <p><strong>Benefit:</strong> {item.topSpeed}</p>
+                  <p><strong>Certification:</strong> {item.groundClearance}</p>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <span className="text-2xl font-bold text-amber-700">{item.price}</span>
+                  <button className="bg-amber-600 text-white px-4 py-1 rounded">Select</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Maneuverability And Lightness + Triumph Triple RS (adapted) */}
+      <section className="bg-black text-white py-12">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+          <div className="md:w-1/2">
+            <h3 className="text-3xl font-bold">Maneuverability And Lightness</h3>
+            <p className="text-xl mt-2 text-amber-400">Triumph Triple RS</p>
+            <p className="mt-4 text-gray-300">Our premium tyre and oil combinations give you the ultimate control and feedback.</p>
+            <button className="mt-6 border border-white px-6 py-2 rounded hover:bg-white hover:text-black transition">Explore</button>
+          </div>
+          <div className="md:w-1/2 relative h-80">
+            <Image src="/images/triumph-triple.jpg" alt="Triumph" fill className="object-cover rounded" />
+          </div>
+        </div>
+      </section>
+
+      {/* Our New Article (blog preview) */}
+
+<section className="container mx-auto px-4 py-12">
+  <h2 className="text-3xl font-bold text-center mb-2">Our New Article</h2>
+  <p className="text-center text-gray-500 mb-8">A laoreet ad litora consequat a luctus a suspendisse.</p>
+  <div className="grid md:grid-cols-3 gap-8">
+    {blogPosts.slice(0, 3).map((blog) => (
+      <div key={blog.id} className="border rounded-lg overflow-hidden shadow hover:shadow-md transition">
+        <Link href={`/blog/${blog.slug}`}>
+          <div className="relative h-48 bg-gray-200">
+            <Image src={blog.image || '/placeholder.jpg'} alt={blog.title} fill className="object-cover" />
+          </div>
+        </Link>
+        <div className="p-4">
+          <p className="text-xs text-gray-500">{blog.date}</p>
+          <Link href={`/blog/${blog.slug}`}>
+            <h3 className="font-bold text-lg mt-1 hover:text-amber-600">{blog.title}</h3>
+          </Link>
+          <p className="text-gray-600 text-sm mt-2 line-clamp-3">{blog.excerpt}</p>
+          <Link href={`/blog/${blog.slug}`} className="text-amber-600 text-sm mt-2 inline-block hover:underline">
+            Read more →
+          </Link>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+      {/* Newsletter & Social Proof */}
+      <div className="bg-gray-100 py-10">
+        <div className="container mx-auto px-4 text-center">
+          <h3 className="text-2xl font-bold">Do You Like Theme?</h3>
+          <p className="text-gray-600">Share With Your Friends!</p>
+          <div className="flex justify-center gap-4 mt-4">
+            <input type="email" placeholder="Your email address" className="border rounded px-4 py-2 w-64" />
+            <button className="bg-amber-600 text-white px-6 py-2 rounded">Subscribe</button>
+          </div>
+          <p className="text-xs text-gray-400 mt-2">Will be used in accordance with our Privacy Policy</p>
+          <div className="mt-6 flex justify-center gap-4 text-sm text-gray-500">
+            <span>Jim Wood - Google Inc.</span>
+          </div>
+        </div>
+      </div>
+
+    </>
   );
 }

@@ -1,0 +1,40 @@
+export interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  price: string;
+  regular_price: string;
+  description: string;
+  categories: string[];
+  images: { src: string }[];
+  stock_status: 'instock' | 'outofstock';
+  is_new?: boolean;
+  is_bestseller?: boolean;
+  views?: number;
+  attributes?: { name: string; value: string }[];
+}
+
+export const products: Product[] = [
+  // ENGINE OILS (10 products)
+  { id: 1, name: "Motul 300V 10W-40", slug: "motul-300v-10w40", price: "1250", regular_price: "1499", description: "Fully synthetic racing oil", categories: ["Engine Oil"], images: [{ src: "/images/oil1.jpg" }], stock_status: "instock", is_new: true, is_bestseller: true, views: 450, attributes: [{ name: "Viscosity", value: "10W-40" }, { name: "Volume", value: "1L" }] },
+  { id: 2, name: "Castrol Power1 20W-50", slug: "castrol-power1-20w50", price: "720", regular_price: "850", description: "Semi-synthetic, excellent gear shift", categories: ["Engine Oil"], images: [{ src: "/images/oil2.jpg" }], stock_status: "instock", is_new: false, is_bestseller: true, views: 320, attributes: [{ name: "Viscosity", value: "20W-50" }, { name: "Volume", value: "1L" }] },
+  { id: 3, name: "Shell Advance Ultra 15W-50", slug: "shell-advance-ultra", price: "890", regular_price: "1099", description: "PurePlus technology", categories: ["Engine Oil"], images: [{ src: "/images/oil3.jpg" }], stock_status: "instock", is_new: true, is_bestseller: false, views: 210, attributes: [{ name: "Viscosity", value: "15W-50" }, { name: "Volume", value: "1L" }] },
+  { id: 4, name: "Liqui Moly 10W-30", slug: "liqui-moly-10w30", price: "950", regular_price: "1199", description: "Molybdenum additive, reduces friction", categories: ["Engine Oil"], images: [{ src: "/images/oil4.jpg" }], stock_status: "instock", is_new: true, is_bestseller: false, views: 180, attributes: [{ name: "Viscosity", value: "10W-30" }, { name: "Volume", value: "1L" }] },
+  { id: 5, name: "Yamalube 20W-40", slug: "yamalube-20w40", price: "680", regular_price: "780", description: "Genuine Yamaha oil", categories: ["Engine Oil"], images: [{ src: "/images/oil5.jpg" }], stock_status: "instock", is_new: false, is_bestseller: false, views: 145, attributes: [{ name: "Viscosity", value: "20W-40" }, { name: "Volume", value: "1L" }] },
+  { id: 6, name: "Valvoline 4T 10W-40", slug: "valvoline-4t-10w40", price: "550", regular_price: "699", description: "Mineral oil, good for commuters", categories: ["Engine Oil"], images: [{ src: "/images/oil6.jpg" }], stock_status: "instock", is_new: false, is_bestseller: false, views: 98, attributes: [{ name: "Viscosity", value: "10W-40" }, { name: "Volume", value: "1L" }] },
+  { id: 7, name: "Gulf Pride 4T 20W-50", slug: "gulf-pride-20w50", price: "590", regular_price: "720", description: "API SL certified", categories: ["Engine Oil"], images: [{ src: "/images/oil7.jpg" }], stock_status: "instock", is_new: false, is_bestseller: true, views: 280, attributes: [{ name: "Viscosity", value: "20W-50" }, { name: "Volume", value: "1L" }] },
+  { id: 8, name: "Motul 7100 5W-40", slug: "motul-7100-5w40", price: "1050", regular_price: "1299", description: "100% synthetic Ester technology", categories: ["Engine Oil"], images: [{ src: "/images/oil8.jpg" }], stock_status: "instock", is_new: true, is_bestseller: true, views: 390, attributes: [{ name: "Viscosity", value: "5W-40" }, { name: "Volume", value: "1L" }] },
+  { id: 9, name: "HP Racer 10W-50", slug: "hp-racer-10w50", price: "820", regular_price: "999", description: "High performance racing oil", categories: ["Engine Oil"], images: [{ src: "/images/oil9.jpg" }], stock_status: "instock", is_new: true, is_bestseller: false, views: 167, attributes: [{ name: "Viscosity", value: "10W-50" }, { name: "Volume", value: "1L" }] },
+  { id: 10, name: "Elf Moto 4XT 10W-40", slug: "elf-moto-4xt", price: "620", regular_price: "760", description: "Techynology for reduced wear", categories: ["Engine Oil"], images: [{ src: "/images/oil10.jpg" }], stock_status: "outofstock", is_new: false, is_bestseller: false, views: 55, attributes: [{ name: "Viscosity", value: "10W-40" }, { name: "Volume", value: "1L" }] },
+  // TYRES (10 products)
+  { id: 11, name: "MRF Zapper FX1", slug: "mrf-zapper-fx1", price: "2450", regular_price: "2700", description: "Front tyre, tubeless, excellent grip", categories: ["Tyres"], images: [{ src: "/images/tyre1.jpg" }], stock_status: "instock", is_new: true, is_bestseller: true, views: 510, attributes: [{ name: "Size", value: "90/90-17" }, { name: "Type", value: "Tubeless" }] },
+  { id: 12, name: "CEAT Zoom XL", slug: "ceat-zoom-xl", price: "3100", regular_price: "3400", description: "Rear tyre, durable compound", categories: ["Tyres"], images: [{ src: "/images/tyre2.jpg" }], stock_status: "instock", is_new: false, is_bestseller: true, views: 420, attributes: [{ name: "Size", value: "120/80-18" }, { name: "Type", value: "Tube" }] },
+  { id: 13, name: "Michelin Pilot Street", slug: "michelin-pilot-street", price: "3850", regular_price: "4300", description: "Radial, silica compound, wet grip", categories: ["Tyres"], images: [{ src: "/images/tyre3.jpg" }], stock_status: "instock", is_new: true, is_bestseller: false, views: 290, attributes: [{ name: "Size", value: "110/70-17" }, { name: "Type", value: "Tubeless" }] },
+  { id: 14, name: "Pirelli Diablo Rosso II", slug: "pirelli-diablo-rosso", price: "5200", regular_price: "5900", description: "Sport tyre, aggressive tread", categories: ["Tyres"], images: [{ src: "/images/tyre4.jpg" }], stock_status: "instock", is_new: true, is_bestseller: true, views: 630, attributes: [{ name: "Size", value: "150/60-17" }, { name: "Type", value: "Tubeless" }] },
+  { id: 15, name: "Dunlop Arrowmax", slug: "dunlop-arrowmax", price: "2780", regular_price: "3100", description: "All-rounder, long life", categories: ["Tyres"], images: [{ src: "/images/tyre5.jpg" }], stock_status: "instock", is_new: false, is_bestseller: false, views: 195, attributes: [{ name: "Size", value: "100/80-17" }, { name: "Type", value: "Tubeless" }] },
+  { id: 16, name: "Bridgestone Battlax", slug: "bridgestone-battlax", price: "4900", regular_price: "5500", description: "Hypersport, triple compound", categories: ["Tyres"], images: [{ src: "/images/tyre6.jpg" }], stock_status: "instock", is_new: true, is_bestseller: false, views: 340, attributes: [{ name: "Size", value: "120/70-17" }, { name: "Type", value: "Tubeless" }] },
+  { id: 17, name: "MRF Masseter", slug: "mrf-masseter", price: "3650", regular_price: "4000", description: "Off-road bias, strong grip", categories: ["Tyres"], images: [{ src: "/images/tyre7.jpg" }], stock_status: "instock", is_new: false, is_bestseller: true, views: 470, attributes: [{ name: "Size", value: "130/80-18" }, { name: "Type", value: "Tube" }] },
+  { id: 18, name: "Continental ContiGo", slug: "continental-contigo", price: "2950", regular_price: "3300", description: "Dual sport, long mileage", categories: ["Tyres"], images: [{ src: "/images/tyre8.jpg" }], stock_status: "outofstock", is_new: false, is_bestseller: false, views: 120, attributes: [{ name: "Size", value: "100/90-18" }, { name: "Type", value: "Tubeless" }] },
+  { id: 19, name: "TVS Eurogrip", slug: "tvs-eurogrip", price: "2100", regular_price: "2400", description: "Budget friendly, good for city", categories: ["Tyres"], images: [{ src: "/images/tyre9.jpg" }], stock_status: "instock", is_new: true, is_bestseller: false, views: 175, attributes: [{ name: "Size", value: "80/100-18" }, { name: "Type", value: "Tube" }] },
+  { id: 20, name: "Apollo Alpha H1", slug: "apollo-alpha-h1", price: "3400", regular_price: "3800", description: "Sport touring, dual compound", categories: ["Tyres"], images: [{ src: "/images/tyre10.jpg" }], stock_status: "instock", is_new: false, is_bestseller: true, views: 410, attributes: [{ name: "Size", value: "140/70-17" }, { name: "Type", value: "Tubeless" }] },
+];

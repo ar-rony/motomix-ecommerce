@@ -1,10 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { useCart } from '@/context/CartContext';
-import {Image} from 'next/image';
+import SearchModal from '@/components/SearchModal';
 import {
   MagnifyingGlassIcon,
   UserIcon,
@@ -17,13 +17,14 @@ import {
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
   const { cart } = useCart();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // Avoid hydration mismatch for theme
-  useState(() => setMounted(true), []);
+  useEffect(() => setMounted(true), []);
 
   const cartItemCount = cart.items.reduce((total, item) => total + item.quantity, 0);
 
@@ -64,7 +65,11 @@ export default function Navbar() {
           {/* Right Icons */}
           <div className="flex items-center gap-4">
             {/* Search */}
-            <button className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400"
+              aria-label="Open search"
+            >
               <MagnifyingGlassIcon className="w-5 h-5" />
             </button>
 
@@ -128,6 +133,7 @@ export default function Navbar() {
           </div>
         )}
       </div>
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </nav>
   );
 }

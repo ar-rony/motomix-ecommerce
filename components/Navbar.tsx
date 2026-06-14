@@ -1,10 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { useCart } from '@/context/CartContext';
-import {Image} from 'next/image';
+import Image from 'next/image';
 import {
   MagnifyingGlassIcon,
   UserIcon,
@@ -23,7 +23,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   // Avoid hydration mismatch for theme
-  useState(() => setMounted(true), []);
+  useEffect(() => setMounted(true), []);
 
   const cartItemCount = cart.items.reduce((total, item) => total + item.quantity, 0);
 

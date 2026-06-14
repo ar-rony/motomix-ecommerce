@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { useCart } from '@/context/CartContext';
+<<<<<<< HEAD
 import SearchModal from '@/components/SearchModal';
+=======
+import Image from 'next/image';
+>>>>>>> a2a8df4397fa7ca6a27d63eb258496a14f596618
 import {
   MagnifyingGlassIcon,
   UserIcon,

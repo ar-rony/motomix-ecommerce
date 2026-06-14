@@ -4,7 +4,7 @@ import ProductCard from '@/components/ProductCard';
 export default function AllProductsPage() {
   return (
     <>
-      <div className="bg-gradient-to-r from-gray-800 to-gray-600 text-white py-10">
+      <div className="bg-linear-to-r from-gray-800 to-gray-600 text-white py-10">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl font-bold">All Products</h1>
           <p className="mt-1">Complete collection of engine oils and tyres</p>

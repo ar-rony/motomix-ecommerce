@@ -20,7 +20,7 @@ export default function BlogPage() {
   return (
     <>
       {/* Header */}
-      <div className="bg-gradient-to-r from-gray-900 to-gray-700 text-white py-12">
+      <div className="bg-linear-to-r from-gray-900 to-gray-700 text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold">Our Blog</h1>
           <p className="text-gray-200 mt-2">Latest news, tips, and articles about motorcycle care</p>
@@ -78,7 +78,7 @@ export default function BlogPage() {
               <div className="space-y-3">
                 {blogPosts.slice(0, 3).map(post => (
                   <Link href={`/blog/${post.slug}`} key={post.id} className="flex gap-3 group">
-                    <div className="w-16 h-16 relative bg-gray-100 rounded flex-shrink-0">
+                    <div className="w-16 h-16 relative bg-gray-100 rounded shrink-0">
                       <Image src={post.image || '/placeholder.jpg'} alt={post.title} fill className="object-cover rounded" />
                     </div>
                     <div>

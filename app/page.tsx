@@ -62,7 +62,9 @@ export default function Home() {
           <div className="md:w-1/2">
             <h3 className="text-3xl font-bold">Together This Affords a Sporty Position.</h3>
             <p className="mt-4 text-gray-600">Is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances toil.</p>
-            <button className="mt-6 bg-amber-600 text-white px-6 py-2 rounded">SHOP NOW</button>
+            <Link href="/product" className="mt-6 bg-amber-600 text-white px-6 py-2 rounded">
+              SHOP NOW
+            </Link>
           </div>
           <div className="md:w-1/2 relative h-64">
             <Image src="/images/sporty-position.jpg" alt="Sporty riding" fill className="object-cover rounded-lg" />
@@ -70,35 +72,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Rent Motorcycle section – adapted to "Find Your Perfect Oil & Tyre" */}
-      <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-center mb-2">Find Your Perfect Oil & Tyre</h2>
-        <p className="text-center text-gray-500 mb-8">A laoreet ad litora consequat a luctus a suspendisse rutrum.</p>
-        <div className="flex flex-col md:flex-row gap-8">
-          {[
-            { name: "Castrol Power1 20W-50", power: "High Performance", topSpeed: "Excellent wear protection", groundClearance: "API SN / JASO MA2", image: "/images/oil2.jpg", price: "$24" },
-            { name: "Pirelli Diablo Rosso II", power: "Sport Grip", topSpeed: "Superb cornering stability", groundClearance: "ZR rated", image: "/images/tyre4.jpg", price: "$89" },
-          ].map((item, idx) => (
-            <div key={idx} className="flex-1 border rounded-lg overflow-hidden shadow-md">
-              <div className="relative h-64 w-full bg-gray-200">
-                <Image src={item.image} alt={item.name} fill className="object-cover" />
-              </div>
-              <div className="p-4">
-                <h3 className="text-xl font-bold">{item.name}</h3>
-                <div className="mt-2 space-y-1 text-sm">
-                  <p><strong>Spec:</strong> {item.power}</p>
-                  <p><strong>Benefit:</strong> {item.topSpeed}</p>
-                  <p><strong>Certification:</strong> {item.groundClearance}</p>
-                </div>
-                <div className="mt-4 flex justify-between items-center">
-                  <span className="text-2xl font-bold text-amber-700">{item.price}</span>
-                  <button className="bg-amber-600 text-white px-4 py-1 rounded">Select</button>
-                </div>
-              </div>
-            </div>
-          ))}
+  {/* Text block: "Together This Affords a Sporty Position" */}
+      <section className="bg-gray-100 py-12 mt-8">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-center">
+           <div className="md:w-1/2 relative h-64 ">
+            <Image src="/images/sporty-position.jpg" alt="Sporty riding" fill className="object-cover rounded-lg" />
+          </div>
+          <div className="md:w-1/2">
+            <h3 className="text-3xl font-bold">Together This Affords a Sporty Position.</h3>
+            <p className="mt-4 text-gray-600">Is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances toil.</p>
+            <Link href="/product" className="mt-6 bg-amber-600 text-white px-6 py-2 rounded mt-6">
+              SHOP NOW
+            </Link>
+          </div>
+         
         </div>
       </section>
+
 
       {/* Maneuverability And Lightness + Triumph Triple RS (adapted) */}
       <section className="bg-black text-white py-12">
@@ -107,7 +97,9 @@ export default function Home() {
             <h3 className="text-3xl font-bold">Maneuverability And Lightness</h3>
             <p className="text-xl mt-2 text-amber-400">Triumph Triple RS</p>
             <p className="mt-4 text-gray-300">Our premium tyre and oil combinations give you the ultimate control and feedback.</p>
-            <button className="mt-6 border border-white px-6 py-2 rounded hover:bg-white hover:text-black transition">Explore</button>
+            <Link href="/category" className="mt-6 border border-white px-6 py-2 rounded hover:bg-white hover:text-black transition">
+              Explore
+            </Link>
           </div>
           <div className="md:w-1/2 relative h-80">
             <Image src="/images/triumph-triple.jpg" alt="Triumph" fill className="object-cover rounded" />

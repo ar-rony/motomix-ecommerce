@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import { products } from '@/data/products';
 import { blogPosts } from '@/data/posts';
 
-const normalize = (value: string) => value.trim().toLowerCase();
+const normalize = (value: string) =>
+  value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '');
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -13,13 +14,15 @@ export async function GET(request: Request) {
   }
 
   const matches = (text: string | undefined) =>
-    text?.toLowerCase().includes(query) ?? false;
+    normalize(text || '').includes(query);
 
   const productResults = products
     .filter((product) =>
       matches(product.name) ||
-      product.categories.some((category) => matches(category)) ||
       matches(product.slug) ||
+      matches(product.company) ||
+      matches(product.grade) ||
+      product.categories.some((category) => matches(category)) ||
       product.attributes?.some((attr) => matches(attr.value))
     )
     .slice(0, 8);

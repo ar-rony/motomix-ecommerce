@@ -4,8 +4,9 @@ import { createContext, useContext, useReducer, useEffect, ReactNode } from 'rea
 export interface CartItem {
   id: number;
   name: string;
-  price: number;
-  image: string;
+  price: string;
+  image?: string;
+  images?: { src: string }[];
   quantity: number;
 }
 
@@ -52,10 +53,18 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 };
 
-const CartContext = createContext<{ cart: CartState; dispatch: React.Dispatch<CartAction> } | undefined>(undefined);
+const CartContext = createContext<{
+  cart: CartState;
+  dispatch: React.Dispatch<CartAction>;
+  removeFromCart: (id: number) => void;
+} | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, dispatch] = useReducer(cartReducer, { items: [] });
+
+  const removeFromCart = (id: number) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: id });
+  };
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -73,7 +82,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('cart', JSON.stringify(cart.items));
   }, [cart]);
 
-  return <CartContext.Provider value={{ cart, dispatch }}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={{ cart, dispatch, removeFromCart }}>
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export const useCart = () => {

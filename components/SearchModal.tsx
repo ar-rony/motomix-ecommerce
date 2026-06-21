@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -21,11 +22,19 @@ interface SearchModalProps {
 }
 
 export default function SearchModal({ open, onClose }: SearchModalProps) {
+  const router = useRouter();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [error, setError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!query.trim()) return;
+    onClose();
+    router.push(`/product?search=${encodeURIComponent(query.trim())}`);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -117,16 +126,26 @@ export default function SearchModal({ open, onClose }: SearchModalProps) {
         </div>
 
         <div className="px-5 py-4">
-          <label className="sr-only" htmlFor="search-query">Search query</label>
-          <input
-            id="search-query"
-            ref={inputRef}
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for oils, tyres, maintenance tips, brands..."
-            className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition focus:border-amber-500 focus:bg-white dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-          />
+          <form onSubmit={handleSearchSubmit} className="space-y-4">
+            <label className="sr-only" htmlFor="search-query">Search query</label>
+            <input
+              id="search-query"
+              ref={inputRef}
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search for oils, tyres, grades, companies, or articles..."
+              className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition focus:border-amber-500 focus:bg-white dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            />
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700 transition"
+              >
+                View full results
+              </button>
+            </div>
+          </form>
         </div>
 
         <div className="max-h-[60vh] overflow-y-auto px-5 pb-6">

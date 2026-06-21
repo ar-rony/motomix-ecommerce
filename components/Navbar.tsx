@@ -111,7 +111,7 @@ export default function Navbar() {
               >
                 GRADES
               </Link>
-              <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 hidden min-w-[12rem] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl group-hover:pointer-events-auto group-hover:block dark:border-gray-700 dark:bg-gray-950">
+              <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 hidden min-w-48 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl group-hover:pointer-events-auto group-hover:block dark:border-gray-700 dark:bg-gray-950">
                 {gradeOptions.map((grade) => (
                   <Link
                     key={grade}
@@ -131,7 +131,7 @@ export default function Navbar() {
               >
                 COMPANIES
               </Link>
-              <div className="pointer-events-none absolute left-0 top-full z-20 hidden min-w-[12rem] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl group-hover:pointer-events-auto group-hover:block dark:border-gray-700 dark:bg-gray-950">
+              <div className="pointer-events-none absolute left-0 top-full z-20 hidden min-w-48 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl group-hover:pointer-events-auto group-hover:block dark:border-gray-700 dark:bg-gray-950">
                 {companyOptions.map((company) => (
                   <Link
                     key={company}

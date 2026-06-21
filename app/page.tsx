@@ -81,7 +81,7 @@ export default function Home() {
           <div className="md:w-1/2">
             <h3 className="text-3xl font-bold">Together This Affords a Sporty Position.</h3>
             <p className="mt-4 text-gray-600">Is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances toil.</p>
-            <Link href="/product" className="mt-6 bg-amber-600 text-white px-6 py-2 rounded mt-6">
+            <Link href="/product" className=" bg-amber-600 text-white px-6 py-2 rounded mt-6">
               SHOP NOW
             </Link>
           </div>

@@ -4,7 +4,7 @@ import { createContext, useContext, useReducer, useEffect, ReactNode } from 'rea
 export interface CartItem {
   id: number;
   name: string;
-  price: string;
+  price: number;
   image?: string;
   images?: { src: string }[];
   quantity: number;
@@ -71,8 +71,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const stored = localStorage.getItem('cart');
     if (stored) {
       try {
-        const items = JSON.parse(stored);
-        dispatch({ type: 'SET_CART', payload: items });
+        const items = JSON.parse(stored) as CartItem[];
+        const normalizedItems = items.map((item) => ({
+          ...item,
+          price: typeof item.price === 'string' ? parseFloat(item.price) || 0 : item.price,
+        }));
+        dispatch({ type: 'SET_CART', payload: normalizedItems });
       } catch (e) {}
     }
   }, []);

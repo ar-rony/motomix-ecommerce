@@ -14,6 +14,7 @@ export interface Product {
   attributes?: { name: string; value: string }[];
   company?: string;
   grade?: string;
+  short_description?: string;
 }
 
 export const products: Product[] = [
